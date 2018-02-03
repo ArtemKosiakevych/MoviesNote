@@ -15,7 +15,7 @@ import store from './storage'
 import { create } from 'mobx-persist'
 const hydrate = create({ storage: AsyncStorage })
 hydrate('movies', store)
-import {observer} from 'mobx-react/native';
+import { observer } from 'mobx-react/native';
 import Swipeout from 'react-native-swipeout';
 
 import styles from './styles'
@@ -23,7 +23,7 @@ import Colors from './Colors';
 
 @observer
 export default class MoviesNote extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       text: ''
@@ -38,7 +38,7 @@ export default class MoviesNote extends Component {
     const movie = this.state.text
     if (movie !== '') {
       store.addMovie(movie)
-      this.setState({text: ''})
+      this.setState({ text: '' })
     }
   }
 
@@ -57,7 +57,7 @@ export default class MoviesNote extends Component {
     return (
       <Swipeout autoClose backgroundColor={Colors.spaceGreyDark} right={swipeoutBtns}>
         <View style={styles.listItem}>
-          <Image style={styles.icon} source={require('./assets/clapperboard.png')}/>
+          <Image style={styles.icon} source={require('./assets/clapperboard.png')} />
           <Text style={styles.listItemText}>{rowData.item}</Text>
         </View>
       </Swipeout>
@@ -76,8 +76,8 @@ export default class MoviesNote extends Component {
           placeholderTextColor={Colors.spaceGrey}
           underlineColorAndroid={'transparent'}
           value={this.state.text}
-          onChangeText={(text) => this.setState({text})}
-          />
+          onChangeText={(text) => this.setState({ text })}
+        />
         <TouchableOpacity onPress={this.onAdd} style={styles.btnWrapper}>
           <Text style={styles.btnText}>ADD</Text>
         </TouchableOpacity>
@@ -86,8 +86,8 @@ export default class MoviesNote extends Component {
           contentContainerStyle={styles.list}
           keyExtractor={(item, index) => index}
           renderItem={this.renderItem}
-          ItemSeparatorComponent={()=> <View style={styles.separator}/>}
-          />
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+        />
       </View>
     );
   }
