@@ -5,8 +5,8 @@ export default StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: Colors.spaceGreyDark,
-    paddingTop: 30,
-    padding: 14
+    padding: 14,
+    paddingTop: 30
   },
   inputText: {
     color: 'white',
@@ -49,5 +49,5 @@ export default StyleSheet.create({
   separator: {
     height: 1,
     backgroundColor: Colors.spaceGrey
-  }
+  },
 });

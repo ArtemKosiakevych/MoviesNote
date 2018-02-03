@@ -6,8 +6,6 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  FlatList,
-  TouchableHighlight,
   LayoutAnimation,
   AsyncStorage
 } from 'react-native';
@@ -18,6 +16,7 @@ hydrate('movies', store)
 import { observer } from 'mobx-react/native';
 import Swipeout from 'react-native-swipeout';
 
+import AwesomeList from 'react-native-awesome-list'
 import styles from './styles'
 import Colors from './Colors';
 
@@ -43,7 +42,7 @@ export default class MoviesNote extends Component {
   }
 
   onDelete = (rowData) => {
-    store.deleteMovie(store.movies.indexOf(rowData.item))
+    store.deleteMovie(store.movies.indexOf(rowData))
   }
 
   renderItem = (rowData) => {
@@ -58,14 +57,26 @@ export default class MoviesNote extends Component {
       <Swipeout autoClose backgroundColor={Colors.spaceGreyDark} right={swipeoutBtns}>
         <View style={styles.listItem}>
           <Image style={styles.icon} source={require('./assets/clapperboard.png')} />
-          <Text style={styles.listItemText}>{rowData.item}</Text>
+          <Text style={styles.listItemText}>{rowData}</Text>
         </View>
       </Swipeout>
     )
   }
 
   render() {
-    let movies = store.movies
+    return (
+      <AwesomeList
+        style={styles.main}
+        headerHeight={140}     
+        data={store.movies}
+        disableScaleAnimation
+        renderItem={this.renderItem}
+        renderAnimatingHeader={()=> this.renderAnimatingHeader('HEADER')}
+      />
+    );
+  }
+
+  renderAnimatingHeader(title){
     return (
       <View style={styles.main}>
         <TextInput
@@ -81,13 +92,6 @@ export default class MoviesNote extends Component {
         <TouchableOpacity onPress={this.onAdd} style={styles.btnWrapper}>
           <Text style={styles.btnText}>ADD</Text>
         </TouchableOpacity>
-        <FlatList
-          data={movies.reverse()}
-          contentContainerStyle={styles.list}
-          keyExtractor={(item, index) => index}
-          renderItem={this.renderItem}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
-        />
       </View>
     );
   }
