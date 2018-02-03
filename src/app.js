@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   FlatList,
+  TouchableHighlight,
   LayoutAnimation,
   AsyncStorage
 } from 'react-native';
@@ -15,7 +16,7 @@ import { create } from 'mobx-persist'
 const hydrate = create({ storage: AsyncStorage })
 hydrate('movies', store)
 import {observer} from 'mobx-react/native';
-import autobind from 'autobind-decorator';
+import Swipeout from 'react-native-swipeout';
 
 import styles from './styles'
 import Colors from './Colors';
@@ -33,8 +34,7 @@ export default class MoviesNote extends Component {
     LayoutAnimation.easeInEaseOut();
   }
 
-  @autobind
-  onAdd(){
+  onAdd = () => {
     const movie = this.state.text
     if (movie !== '') {
       store.addMovie(movie)
@@ -42,18 +42,25 @@ export default class MoviesNote extends Component {
     }
   }
 
-  @autobind
-  onDelete(rowData){
+  onDelete = (rowData) => {
     store.deleteMovie(store.movies.indexOf(rowData.item))
   }
 
-  @autobind
-  renderItem(rowData){
+  renderItem = (rowData) => {
+    var swipeoutBtns = [
+      {
+        text: 'Delete',
+        type: 'delete',
+        onPress: () => this.onDelete(rowData)
+      }
+    ]
     return (
-      <TouchableOpacity onPress={() => this.onDelete(rowData)} style={styles.listItem}>
-        <Image style={styles.icon} source={require('./assets/clapperboard.png')}/>
-        <Text style={styles.listItemText}>{rowData.item}</Text>
-      </TouchableOpacity>
+      <Swipeout autoClose backgroundColor={Colors.spaceGreyDark} right={swipeoutBtns}>
+        <View style={styles.listItem}>
+          <Image style={styles.icon} source={require('./assets/clapperboard.png')}/>
+          <Text style={styles.listItemText}>{rowData.item}</Text>
+        </View>
+      </Swipeout>
     )
   }
 
