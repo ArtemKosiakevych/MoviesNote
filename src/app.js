@@ -4,6 +4,7 @@ import {
   Text,
   View,
   Image,
+  StatusBar,
   TextInput,
   TouchableOpacity,
   LayoutAnimation,
@@ -17,6 +18,7 @@ import { observer } from 'mobx-react/native';
 import Swipeout from 'react-native-swipeout';
 
 import AwesomeList from 'react-native-awesome-list'
+const OAwesomeList = observer(AwesomeList)
 import styles from './styles'
 import Colors from './Colors';
 
@@ -55,30 +57,33 @@ export default class MoviesNote extends Component {
     ]
     return (
       <Swipeout autoClose backgroundColor={Colors.spaceGreyDark} right={swipeoutBtns}>
-        <View style={styles.listItem}>
+        <TouchableOpacity style={styles.listItem}>
           <Image style={styles.icon} source={require('./assets/clapperboard.png')} />
           <Text style={styles.listItemText}>{rowData}</Text>
-        </View>
+        </TouchableOpacity>
       </Swipeout>
     )
   }
 
   render() {
     return (
-      <AwesomeList
-        style={styles.main}
-        headerHeight={140}     
-        data={store.movies}
-        disableScaleAnimation
-        renderItem={this.renderItem}
-        renderAnimatingHeader={()=> this.renderAnimatingHeader('HEADER')}
-      />
+      <View style={styles.main}>
+      <StatusBar barStyle={'light-content'}/>
+        <AwesomeList
+          headerHeight={140}     
+          data={store.movies}
+          disableScaleAnimation
+          renderItem={this.renderItem}
+          renderAnimatingHeader={()=> this.renderAnimatingHeader()}
+        />
+      </View>
+
     );
   }
 
-  renderAnimatingHeader(title){
+  renderAnimatingHeader(){
     return (
-      <View style={styles.main}>
+      <View>
         <TextInput
           style={styles.inputText}
           autoFocus={true}
