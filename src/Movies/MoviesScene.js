@@ -2,6 +2,7 @@ import React from 'react'
 import { LayoutAnimation, AsyncStorage } from 'react-native'
 import { observer } from 'mobx-react/native'
 import { create } from 'mobx-persist'
+
 import State from './MoviesState'
 import MoviesView from './MoviesView'
 
