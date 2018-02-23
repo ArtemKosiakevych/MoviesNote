@@ -1,16 +1,23 @@
+// @flow
+
 import React from 'react'
 import { View, TouchableOpacity, TextInput, Text } from 'react-native'
-import PropTypes from 'prop-types'
 import i18n from 'react-native-i18n';
 
 import Colors from '../../theme/Colors'
 import styles from '../styles'
 
+type Props = {
+    text: string,
+    onChangeText: () => string,
+    onAdd: () => void,
+}
+
 const Header = ({ 
     text, 
     onChangeText,
     onAdd 
-}) => (
+}: Props) => (
     <View>
         <TextInput
             style={styles.inputText}
@@ -27,11 +34,5 @@ const Header = ({
         </TouchableOpacity>
   </View>
 )
-
-Header.propTypes = {
-    text: PropTypes.string,
-    onChangeText: PropTypes.func,
-    onAdd: PropTypes.func,
-}
 
 export default Header
