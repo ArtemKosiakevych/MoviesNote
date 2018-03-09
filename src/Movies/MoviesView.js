@@ -6,24 +6,26 @@ import AwesomeList from 'react-native-awesome-list'
 import styles from './styles'
 import Header from './Views/Header'
 import Item from './Views/Item'
+
 const OAwesomeList = observer(AwesomeList)
 const OHeader = observer(Header)
 const OItem = observer(Item)
 
-const MoviesView = ({ 
-  state, 
+const MoviesView = ({
+  state,
   onAdd,
-  onDelete
+  onDelete,
 }) => {
+  const { text, onChangeText } = state
   const renderHeader = () => {
     return (
       <OHeader
-        text={state.text}
-        onChangeText={state.onChangeText}
+        text={text}
+        onChangeText={onChangeText}
         onAdd={onAdd}
       />
-    );
-  };
+    )
+  }
 
   const renderItem = (rowData) => {
     return (
@@ -36,17 +38,18 @@ const MoviesView = ({
 
   return (
     <View style={styles.main}>
-      <StatusBar barStyle={"light-content"} />
+      <StatusBar barStyle={'light-content'} />
       <OAwesomeList
         headerHeight={140}
         data={state.movies}
         disableScaleAnimation
         renderItem={renderItem}
         renderAnimatingHeader={renderHeader}
+        contentContainerStyle={styles.padding}
       />
     </View>
-  );
-};
+  )
+}
 
 MoviesView.propTypes = {
   state: PropTypes.any,

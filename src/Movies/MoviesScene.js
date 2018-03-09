@@ -12,8 +12,9 @@ hydrate('movies', State)
 
 @observer
 export default class MoviesScene extends React.Component {
+  /* eslint-disable class-methods-use-this */
   componentWillUpdate() {
-    LayoutAnimation.easeInEaseOut();
+    LayoutAnimation.easeInEaseOut()
   }
 
   onAdd = () => {
@@ -25,7 +26,7 @@ export default class MoviesScene extends React.Component {
   }
 
   onDelete = (rowData) => {
-    State.deleteMovie(State.movies.indexOf(rowData))
+    State.deleteMovie(rowData)
   }
 
   render() {

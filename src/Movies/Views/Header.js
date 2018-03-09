@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { View, TouchableOpacity, TextInput, Text } from 'react-native'
-import i18n from 'react-native-i18n';
+import i18n from 'react-native-i18n'
 
 import Colors from '../../theme/Colors'
 import styles from '../styles'
@@ -13,12 +13,12 @@ type Props = {
     onAdd: () => void,
 }
 
-const Header = ({ 
-    text, 
-    onChangeText,
-    onAdd 
+const Header = ({
+  text,
+  onChangeText,
+  onAdd,
 }: Props) => (
-    <View>
+    <View style={styles.padding}>
         <TextInput
             style={styles.inputText}
             autoFocus={true}
@@ -28,6 +28,9 @@ const Header = ({
             underlineColorAndroid={'transparent'}
             value={text}
             onChangeText={onChangeText}
+            returnKeyType={'done'}
+            onSubmitEditing={onAdd}
+            keyboardAppearance={'dark'}
         />
         <TouchableOpacity onPress={onAdd} style={styles.btnWrapper}>
             <Text style={styles.btnText}>{i18n.t('ADD')}</Text>

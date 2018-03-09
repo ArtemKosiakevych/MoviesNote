@@ -5,19 +5,19 @@ class MoviesState {
     @persist('list') @observable movies = []
     @observable text = ''
 
-    @action addMovie(val){
+    @action addMovie(val) {
       this.movies.push(val)
     }
-  
-    @action deleteMovie(index){
-      this.movies.splice(index, 1)
+
+    @action deleteMovie(item) {
+      this.movies = this.movies.filter(i => i !== item)
     }
-  
+
     @action onChangeText = (val) => {
       this.text = val
     }
 
-    get text(){
+    get text() {
       return this.text
     }
 }
