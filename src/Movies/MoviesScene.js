@@ -13,7 +13,7 @@ hydrate('movies', State)
 @observer
 export default class MoviesScene extends React.Component {
   /* eslint-disable class-methods-use-this */
-  componentWillUpdate() {
+  componentDidUpdate() {
     LayoutAnimation.easeInEaseOut()
   }
 
