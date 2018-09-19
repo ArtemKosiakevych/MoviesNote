@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 import { View, StatusBar } from 'react-native'
 import { observer } from 'mobx-react/native'
@@ -11,16 +13,24 @@ const OAwesomeList = observer(AwesomeList)
 const OHeader = observer(Header)
 const OItem = observer(Item)
 
+type Props = {
+  state: Object,
+  onAdd: () => void,
+  onDelete: (string) => void,
+  onClick: () => void,
+}
+
 const MoviesView = ({
   state,
   onAdd,
   onDelete,
-}) => {
-  const { text, onChangeText } = state
+  onClick,
+}: Props) => {
+  const { query, onChangeText } = state
   const renderHeader = () => {
     return (
       <OHeader
-        text={text}
+        text={query}
         onChangeText={onChangeText}
         onAdd={onAdd}
       />
@@ -32,6 +42,7 @@ const MoviesView = ({
       <OItem
         rowData={rowData}
         onDelete={onDelete}
+        onClick={onClick}
       />
     )
   }

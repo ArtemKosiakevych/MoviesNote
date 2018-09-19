@@ -19,6 +19,13 @@
 ; Ignore metro
 .*/node_modules/metro/.*
 
+.*/node_modules/prettier/.*
+.*/node_modules/eslint.*
+
+[untyped]
+.*/node_modules/react-native
+.*/node_modules/react-native-check-box
+
 [include]
 
 [libs]
@@ -28,7 +35,7 @@ node_modules/react-native/flow-github/
 
 [options]
 emoji=true
-
+esproposal.decorators=ignore
 module.system=haste
 
 munge_underscores=true
@@ -51,4 +58,4 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
 [version]
-^0.65.0
+^0.68.0

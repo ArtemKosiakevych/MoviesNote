@@ -11,10 +11,12 @@ import styles from '../styles'
 type Props = {
     rowData: string,
     onDelete: (string) => void,
+    onClick: (string) => void,
 }
 const Item = ({
   rowData,
   onDelete,
+  onClick,
 }: Props) => {
   const swipeoutBtns = [
     {
@@ -23,9 +25,10 @@ const Item = ({
       onPress: () => onDelete(rowData),
     }]
 
+  const onPress = () => onClick(rowData)
   return (
         <Swipeout autoClose backgroundColor={Colors.spaceGreyDark} right={swipeoutBtns}>
-            <TouchableOpacity style={styles.listItem}>
+            <TouchableOpacity onPress={onPress} style={styles.listItem}>
                 <Image style={styles.icon} source={Images.clapperboard} />
                 <Text style={styles.listItemText}>{rowData}</Text>
             </TouchableOpacity>
